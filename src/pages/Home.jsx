@@ -38,7 +38,7 @@ const Home = ({setUserState}) => {
                 </div>
             </div>
     ))}
-    <button onClick={handleClick} style={{width: "20%", alignSelf: "end"}}>SignOut</button>
+    <button onClick={handleClick} style={{width: "150px", alignSelf: "end"}}>SignOut</button>
     </div>
   )
 }

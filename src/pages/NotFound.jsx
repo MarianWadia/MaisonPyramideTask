@@ -6,7 +6,7 @@ const NotFound = () => {
   return (
     <div className='not-auth'>
         <p>This Page is Not Found ⛔⛔ </p>
-        <button style={{width: "20%"}}>
+        <button style={{width: "150px"}}>
             <Link to="/home">Go Home</Link>
         </button>
     </div>

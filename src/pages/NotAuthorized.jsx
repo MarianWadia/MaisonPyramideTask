@@ -7,7 +7,7 @@ const NotAuthorized = () => {
   return (
     <div className='not-auth'>
         <p>You are not Authorized to go Home Please Login First 🔻 🔻</p>
-        <button style={{width: "20%"}}>
+        <button style={{width: "150px"}}>
             <Link to="/signin">SignIn Here</Link>
         </button>
     </div>
