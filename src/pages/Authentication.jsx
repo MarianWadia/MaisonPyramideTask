@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
 import {auth} from "../config/firebase"
 import {database} from "../config/firebase"
-import "./Authentication.css"
+import "../styles/authentication.css"
 import { Link, useNavigate } from 'react-router-dom'
 
 const Authentication = () => {
@@ -14,8 +14,7 @@ const Authentication = () => {
         e.preventDefault();
         signInWithEmailAndPassword (auth, mail, password).then((userCredential) => {
             if(userCredential.user){
-                window.localStorage.setItem("userId", userCredential.user.uid)
-               navigate("/home")
+                navigate("/home")
             }else{
                 console.log("Login failed")
             }

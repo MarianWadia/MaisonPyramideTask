@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {auth, database} from "../config/firebase"
-import "./Authentication.css"
+import "../styles/authentication.css"
 import { collection, addDoc } from "firebase/firestore"; 
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
@@ -12,10 +12,17 @@ const Register = () => {
     const navigate = useNavigate()
 
 
+    // Create user and save its data in firestore
    const onSubmit = async (e) => {
         e.preventDefault();
         try {
             const userCredintials = await createUserWithEmailAndPassword(auth, mail, password)
+
+            // * To call this function from the cloud we need to have an upgraded plan account for firebase 
+            // * createUserDocument()
+            // * also we will need to have displayName initialized to name like that
+            // * const displayName = name;
+
             const user = await userCredintials.user
             const docRef = await addDoc(collection(database, "users"), {
                 name, 
@@ -33,11 +40,10 @@ const Register = () => {
             <div className="form-box">
                 <div className="form-value">
                     <form onSubmit={onSubmit}>
-
                         <h2>Register</h2>
 
                         <div className="input-value">
-                            <label style={{color: "white"}}>Name</label>
+                            <label>Name</label>
                             <input type="text" required onChange={(e)=>setName(e.target.value)} value={name} /> 
                         </div>
 
@@ -54,7 +60,7 @@ const Register = () => {
                         <button type='submit'>Register</button>
 
                         <div className="register">
-                            <p>Have an account? <Link to="/SignIn">SignIn</Link></p>
+                            <p>Have an account? <Link to="/signin">SignIn</Link></p>
                         </div>
                     </form>
                 </div>
