@@ -5,7 +5,7 @@ const { getFirestore, collection, addDoc } = require("firebase-admin/firestore")
 initializeApp();
 
 exports.createUserDocument = functions.auth.user().onCreate(async (userCredentials) => {
-    const user = userCredentials;
+    const user = userCredentials.user;
 
     // Create a new user document in Firestore
     const db = getFirestore();

@@ -19,7 +19,7 @@ const Register = () => {
             const userCredintials = await createUserWithEmailAndPassword(auth, mail, password)
 
             // * To call this function from the cloud we need to have an upgraded plan account for firebase 
-            // * createUserDocument()
+            // * createUserDocument(name)
             // * also we will need to have displayName initialized to name like that
             // * const displayName = name;
 
