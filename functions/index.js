@@ -1,25 +1,29 @@
 const functions = require("firebase-functions");
-const { initializeApp } = require("firebase-admin");
-const { getFirestore, collection, addDoc } = require("firebase-admin/firestore");
+const admin = require("firebase-admin");
+// const { getFirestore, collection, addDoc } = require("firebase-admin/firestore");
 
-initializeApp();
+
+const serviceAccount = require("./maisonpyramide-71150-firebase-adminsdk-3rcb2-716bf7595a.json")
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+});
 
 exports.createUserDocument = functions.auth.user().onCreate(async (userCredentials) => {
     const user = userCredentials.user;
-
+  
     // Create a new user document in Firestore
-    const db = getFirestore();
-    const userRef = collection(db, "users");
-
+    const db = admin.firestore(); 
+    const userRef = db.collection("users"); 
+  
     try {
-        await addDoc(userRef, {
-            name: user.displayName,
-            email: user.email,
-            createdAt: user.metadata.creationTime
-        });
-        return null;
+      await userRef.add({
+        name: user.displayName,
+        email: user.email,
+        createdAt: user.metadata.creationTime,
+      });
+      return null;
     } catch (error) {
-        console.error("Error creating user document:", error);
-        return null;
+      console.error("Error creating user document:", error);
+      return null;
     }
-});
+  });
